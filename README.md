@@ -1,6 +1,6 @@
 # Overview
 
-Swimport is an ETL suite that takes the busywork out of your data migrations.
+Swimport is an ETL suite that lets you automate your data migrations.
 
 # Quick Start
 
