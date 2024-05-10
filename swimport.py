@@ -40,7 +40,7 @@ def create_project(project_name:str) -> None:
         raise projectExists(project_name)
 
     text = f'''title = "{project_name}"
-    name = "{project_name_safe}"
+name = "{project_name_safe}"
 '''
     with open(f'{project_name_safe}/config.toml', 'w') as f:
         f.write(text)
