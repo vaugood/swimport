@@ -4,7 +4,7 @@ Swimport is an ETL suite that lets you automate your data migrations.
 
 # Quick Start
 
-
+...
 
 # Acknowledgements
 
@@ -13,6 +13,7 @@ All of the things that made this project possible.
 ## Libraries
 
 - GUI powered by [NiceGUI](https://nicegui.io/)
+- Data manipulation powered by Pandas
 
 ## Resources
 
