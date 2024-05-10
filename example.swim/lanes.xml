@@ -1,0 +1,33 @@
+<swimlanes>
+    <swimlane>
+        <lane>1</lane>
+        <input type='csv'>orders.csv</input>
+        <swimlap>
+            <column>line_items</column>
+            <operation name='split'>
+                <pat>,</pat>
+            </operation>
+        </swimlap>
+        <swimlap>
+            <column></column>
+            <operation name='explode'>
+                <series>
+                    <col>line_items</col>
+                </series>
+            </operation>
+        </swimlap>
+        <swimlap>
+            <column></column>
+            <operation name='sort_values'>
+                <by>order_number</by>
+                <ascending>0</ascending>
+            </operation>
+        </swimlap>
+        <swimlap>
+            <column></column>
+            <operation name='reset_index'>
+                <drop>1</drop>
+            </operation>
+        </swimlap>
+    </swimlane>
+</swimlanes>
