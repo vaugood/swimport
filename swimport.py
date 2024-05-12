@@ -39,11 +39,17 @@ def create_project(project_name:str) -> None:
     else:
         raise projectExists(project_name)
 
-    text = f'''title = "{project_name}"
+    config_text = f'''title = "{project_name}"
 name = "{project_name_safe}"
 '''
+    lanes_text = f'''<swimlanes>
+</swimlanes>
+'''
     with open(f'{project_name_safe}/config.toml', 'w') as f:
-        f.write(text)
+        f.write(config_text)
+    with open(f'{project_name_safe}/lanes.xml', 'w') as f:
+        f.write(lanes_text)
+    os.mkdir(f'{project_name_safe}/scripts')
 
 def delete_project(project:str) -> None:
     if not os.path.exists(project):
