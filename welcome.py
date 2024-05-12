@@ -1,5 +1,6 @@
 from nicegui import ui
 import swimport as sp
+import swimview as sv
 
 def projects_grid() -> ui.aggrid:
     grid = ui.aggrid({
@@ -22,11 +23,11 @@ def handle_create(name):
 @ui.page('/create')
 def project_maker():
     ui.link('Back','/')
-    pj_name = ui.input(label='Project Name',
+    project_name = ui.input(label='Project Name',
                     on_change=lambda e: safename_preview.set_text('Project will save as: ' + sp.make_project_name(e.value) if e.value else ''),
                     validation={'Input too long!': lambda value: len(value) < 200})
     safename_preview = ui.label()
-    ui.button('Create', on_click=lambda: handle_create(pj_name.value))
+    ui.button('Create', on_click=lambda: handle_create(project_name.value))
 
 @ui.page('/open')
 def project_opener():
@@ -36,6 +37,7 @@ def project_opener():
         if project:
             try:
                 ui.notify(f'''Open {project['name']}''')
+                ui.navigate.to(f'''/swimview?project_name={project['name']}''')
             except sp.projectMissing:
                 ui.notify(f'''{project['name']} has moved, changed, or deleted. Try reloading.''')
         else:
