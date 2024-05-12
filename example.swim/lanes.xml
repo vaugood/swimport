@@ -1,33 +1,42 @@
 <swimlanes>
-    <swimlane>
-        <lane>1</lane>
-        <input type='csv'>orders.csv</input>
-        <swimlap>
-            <column>line_items</column>
-            <operation name='split'>
-                <pat>,</pat>
-            </operation>
-        </swimlap>
-        <swimlap>
-            <column></column>
-            <operation name='explode'>
-                <series>
-                    <col>line_items</col>
-                </series>
-            </operation>
-        </swimlap>
-        <swimlap>
-            <column></column>
-            <operation name='sort_values'>
-                <by>order_number</by>
-                <ascending>0</ascending>
-            </operation>
-        </swimlap>
-        <swimlap>
-            <column></column>
-            <operation name='reset_index'>
-                <drop>1</drop>
-            </operation>
-        </swimlap>
+    <swimlane type='pandas'>
+        <name>orders</name>
+        <swimlaps>
+            <operation>orders = pd.read_csv('example.swim/orders.csv')</operation>
+            <operation>orders = orders.sort_values(by='order_number',ascending=False)</operation>
+            <operation>orders['line_items'] = orders['line_items'].str.split(pat=',')</operation>
+            <operation>orders = orders.explode(column=['line_items'])</operation>
+            <operation>orders['line_items'] = orders['line_items'].str.strip()</operation>
+            <operation>orders = orders.reset_index(drop=True)</operation>
+        </swimlaps>
+    </swimlane>
+    <swimlane type='pandas'>
+        <name>accounts</name>
+        <swimlaps>
+            <operation>accounts = pd.read_csv('example.swim/accounts.csv')</operation>
+        </swimlaps>
+    </swimlane>
+    <swimlane type='pandas'>
+        <name>contacts</name>
+        <swimlaps>
+            <operation>contacts = pd.read_csv('example.swim/contacts.csv')</operation>
+        </swimlaps>
+    </swimlane>
+    <swimlane type='pandas'>
+        <name>order_detail</name>
+        <swimlaps>
+            <operation>order_detail = orders</operation>
+            <operation>order_detail = order_detail.merge(accounts, how='left', left_on='customer', right_on='accountid')</operation>
+            <operation>order_detail = order_detail.merge(contacts, how='left', left_on='customer', right_on='contactid')</operation>
+        </swimlaps>
+    </swimlane>
+    <swimlane type='script'>
+        <name>products</name>
+        <arguments>
+            <argument>
+                <argname>apikey</argname>
+                <argvalue>"9cdfb439c7876e703e307864c9167a15"</argvalue>
+            </argument>
+        </arguments>
     </swimlane>
 </swimlanes>
