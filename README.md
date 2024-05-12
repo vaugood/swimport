@@ -25,4 +25,5 @@ A chronological list of helpful articles I utilized while building this project.
 - https://note.nkmk.me/en/python-os-remove-rmdir-removedirs-shutil-rmtree/
 - https://stackoverflow.com/questions/14688306/adding-meta-information-metadata-to-pandas-dataframe
 - https://www.freecodecamp.org/news/python-switch-statement-switch-case-example/
+- https://stackoverflow.com/questions/23168282/setting-variables-with-exec-inside-a-function
 - https://stackoverflow.com/questions/67631/how-can-i-import-a-module-dynamically-given-the-full-path
